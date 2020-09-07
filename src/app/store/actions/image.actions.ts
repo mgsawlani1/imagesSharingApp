@@ -46,7 +46,7 @@ export class DeleteImageSuccess implements Action {
   readonly type = DELETE_IMAGE_SUCCESS;
 }
 
-export type Actions =
+export type ImageActions =
   | Add
   | Update
   | Delete

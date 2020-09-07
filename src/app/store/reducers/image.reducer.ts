@@ -14,7 +14,7 @@ export const initialState: State = {
   success: null,
 };
 
-export function imageReducer(state: State = initialState, action: ImageAction.Actions): State {
+export function imageReducer(state: State = initialState, action: ImageAction.ImageActions): State {
   switch (action.type) {
     case ADD_IMAGE: {
       return {

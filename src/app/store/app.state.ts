@@ -1,15 +1,15 @@
 import { createFeatureSelector } from '@ngrx/store';
-import { User } from './../core/models/user';
-import { imageReducer } from './reducers/image.reducer';
-import { reducer } from './reducers/login.reducer';
+import * as image from '../store/reducers/image.reducer';
+import * as auth from '../store/reducers/login.reducer';
 
 export interface AppState {
-  readonly login: User[];
+  // loginState: auth.State
+  image: image.State;
 }
 
 export const reducers = {
-  login: reducer,
-  image: imageReducer,
+  auth: auth.reducer,
+  image: image.imageReducer,
 };
 
 export const selectAuthState = createFeatureSelector<AppState>('login');

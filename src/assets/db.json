@@ -1,32 +1,46 @@
 {
   "images": [
     {
-      "id": "100",
-      "name": "dfsfs",
-      "description": "sdds",
-      "imageUrl": ""
+      "id": 1,
+      "name": "Nature",
+      "description": "Incidunt et magni est ut.",
+      "imageUrl": "assets/nature1.jpg"
     },
     {
-      "id": "n6p3em8",
-      "name": "Nature 88",
-      "description": "sdffsas",
-      "imageUrl": "as"
+      "id": 2,
+      "name": "Sunset",
+      "description": "Sint libero mollitia.",
+      "imageUrl": "assets/nature2.jpg"
     },
     {
-      "id": "YfTT0MZ",
-      "name": "Nature 44",
-      "description": "sdds",
-      "imageUrl": "sdsd"
+      "id": 3,
+      "name": "Sunrise",
+      "description": "In consequuntur cupiditate et unde minus.",
+      "imageUrl": "assets/sunrise.jpg"
     },
     {
-      "isTrusted": true,
-      "id": "3dxDDrV"
+      "id": 4
     },
     {
-      "id": "KhHOoTI",
-      "name": "sddsd",
-      "description": "dsd",
-      "imageUrl": "dsds"
+      "id": 5
+    },
+    {
+      "id": 6
+    },
+    {
+      "id": 7
+    },
+    {
+      "id": 8
+    },
+    {
+      "id": 9
+    },
+    {
+      "id": 10
+    },
+    {
+      "id": 11
     }
   ],
   "auth": [

@@ -4,9 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ImagesService } from '../core/services/images.service';
 import * as ImageAction from '../store/actions/image.actions';
-import { AppState } from '../store/app.state';
-import { ImageState } from '../store/image.state';
-import { imageState } from './../store/app.state';
+import { AppState, imageState } from '../store/app.state';
 
 @Component({
   selector: 'app-images',
@@ -21,48 +19,36 @@ export class ImagesListComponent implements OnInit {
   constructor(
     private imgService: ImagesService,
     private _routeParams: ActivatedRoute,
-    private store: Store<ImageState>,
-    private loginStore: Store<AppState>
+    private store: Store<AppState>
   ) {
     this.isAuthUser = _routeParams.snapshot.params['isAuthUser'];
     this.getState = this.store.select(imageState);
   }
 
   ngOnInit(): void {
-    this.getAllQuotes();
+    this.getAllImages();
     this.createImage = false;
-    this.store.subscribe((data) => {
-      this.images = data.image;
-      console.log('images fromm store', data);
-    });
-    // this.store.select('image').subscribe((data) => {
-    //   this.images = data;
-    // });
-
-    // this.imgService.getImageData().subscribe(
-    //   (image) => {
-    //     this.images = image;
-    //   },
-    //   (error) => {
-    //     console.log('Error : ', error);
-    //     window.alert(error.status);
-    //   }
-    // );
+    this.store.subscribe(
+      (data) => {
+        this.images = data.image.image;
+        console.log('images fromm store', this.images);
+      },
+      (error) => {
+        console.log('Error : ', error);
+        window.alert(error.status);
+      }
+    );
   }
-  private getAllQuotes(): void {
+  getAllImages(): void {
     this.store.dispatch(new ImageAction.GetImages());
   }
   delete(id: number): any {
     if (!this.isAuthUser) {
       window.alert('Please Login to Edit data');
     }
+    const confirmation = window.confirm('Are you sure you want to delete this image?');
+
     this.store.dispatch(new ImageAction.Delete(id));
-    this.imgService.deleteImageById(id).subscribe(
-      (image) => {},
-      (error) => {
-        console.log('Error : ', error);
-        window.alert(error.status);
-      }
-    );
+    this.store.dispatch(new ImageAction.GetImages());
   }
 }

@@ -7,9 +7,6 @@ import {
   Add,
   AddImageSuccess,
   ADD_IMAGE,
-  Delete,
-  DeleteImageSuccess,
-  DELETE_IMAGE,
   GetImages,
   GET_IMAGES,
   LoadDataSuccess,
@@ -28,6 +25,8 @@ export class ImageEffects {
     mergeMap((payload) => {
       return this.imageService.getImageData().pipe(
         map((data) => {
+          console.log('data from effects', data);
+
           return new LoadDataSuccess(data);
         })
       );
@@ -48,18 +47,18 @@ export class ImageEffects {
       );
     })
   );
-  @Effect({ dispatch: true })
-  DeleteImage: Observable<any> = this.actions.pipe(
-    ofType(DELETE_IMAGE),
-    map((action: Delete) => action.payload),
-    mergeMap((payload) => {
-      return this.imageService.deleteImageById(payload).pipe(
-        map((data) => {
-          return new DeleteImageSuccess();
-        })
-      );
-    })
-  );
+  //   @Effect({ dispatch: true })
+  //   DeleteImage: Observable<any> = this.actions.pipe(
+  //     ofType(DELETE_IMAGE),
+  //     map((action: Delete) => action.payload),
+  //     mergeMap((payload) => {
+  //       return this.imageService.deleteImageById(payload).pipe(
+  //         map((data) => {
+  //           return new DeleteImageSuccess();
+  //         })
+  //       );
+  //     })
+  //   );
   @Effect({ dispatch: true })
   UpdateImages: Observable<any> = this.actions.pipe(
     ofType(UPDATE_IMAGE),

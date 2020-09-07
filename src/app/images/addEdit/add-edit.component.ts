@@ -37,7 +37,6 @@ export class AddEditComponent implements OnInit {
     this.imgService.getImageDataById(id).subscribe(
       (image) => {
         this.editForm.setValue(image);
-        console.log(image);
       },
       (error) => {
         console.log('Error : ', error);
@@ -73,7 +72,6 @@ export class AddEditComponent implements OnInit {
     } else {
       this.imgService.updateImage(value).subscribe(
         (image) => {
-          console.log(image);
           this.router.navigate(['/image']);
         },
         (error) => {
