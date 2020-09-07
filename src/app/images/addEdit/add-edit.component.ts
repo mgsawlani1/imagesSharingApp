@@ -13,15 +13,26 @@ import { ImageState } from './../../store/image.state';
 })
 export class AddEditComponent implements OnInit {
   edit = false;
+
   image: any;
+
   public editForm: FormGroup;
+
   imageData: any;
+
   submitted = false;
+
+  isAuthUser: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
+
     private router: Router,
+
     private imgService: ImagesService,
+
     private store: Store<ImageState>,
+
     private fb: FormBuilder
   ) {
     this.editForm = this.fb.group({
@@ -30,10 +41,12 @@ export class AddEditComponent implements OnInit {
       description: ['', Validators.required],
       imageUrl: ['', Validators.required],
     });
+
     const id = +this.route.snapshot.paramMap.get('id');
     if (id) {
       this.edit = true;
     }
+
     this.imgService.getImageDataById(id).subscribe(
       (image) => {
         this.editForm.setValue(image);
@@ -50,6 +63,7 @@ export class AddEditComponent implements OnInit {
   get form(): any {
     return this.editForm.controls;
   }
+
   resetForm(): any {
     this.editForm.controls['name'].setValue(this.image.name);
     this.editForm.controls['description'].setValue(this.image.description);
@@ -62,7 +76,7 @@ export class AddEditComponent implements OnInit {
     if (!this.edit) {
       this.imgService.addImage(value).subscribe(
         (image) => {
-          this.router.navigate(['/image']);
+          this.router.navigate(['/image', { isAuthUser: false }]);
         },
         (error) => {
           console.log('Error : ', error);
@@ -72,7 +86,7 @@ export class AddEditComponent implements OnInit {
     } else {
       this.imgService.updateImage(value).subscribe(
         (image) => {
-          this.router.navigate(['/image']);
+          this.router.navigate(['/image', { isAuthUser: false }]);
         },
         (error) => {
           console.log('Error : ', error);

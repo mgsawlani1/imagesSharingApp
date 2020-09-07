@@ -30,7 +30,9 @@
 
     <br />
     <br />
-    <button type="submit" name="log" id="log" value="Log In " [disabled]="loading">Log In</button>
+    <button type="submit" name="log" id="log" value="Log In " [disabled]="loginForm.invalid">
+      Log In
+    </button>
     <br /><br />
   </form>
 </div>

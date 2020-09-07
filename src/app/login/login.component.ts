@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
 import { User } from '../core/models/user';
 import { AuthService } from '../core/services/auth.service';
 import { ImagesService } from '../core/services/images.service';
-import { AppState } from '../store/app.state';
+import { LogIn } from '../store/actions/login.actions';
+import { AppState, selectAuthState } from '../store/app.state';
 
 @Component({
   selector: 'app-login',
@@ -15,14 +16,24 @@ import { AppState } from '../store/app.state';
 })
 export class LoginComponent implements OnInit {
   users: Observable<User[]>;
+
   images: any;
+
   username: string;
+
   loginForm: FormGroup;
-  loading = false;
+
   submitted = false;
   error = '';
-  authUser: any;
-  isAuthUser: boolean;
+
+  isAuthUser: boolean = false;
+
+  getState: Observable<any>;
+
+  errorMessage: string;
+
+  user: User;
+
   constructor(
     private router: Router,
     private imgService: ImagesService,
@@ -30,40 +41,34 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private store: Store<AppState>
   ) {
-    store.select('login').subscribe((data) => {});
+    this.getState = this.store.select(selectAuthState);
   }
 
   ngOnInit(): void {
+    this.setLoginForm();
+  }
+
+  setLoginForm(): void {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
-
   get form(): any {
     return this.loginForm.controls;
   }
 
   onSubmit(): any {
-    this.submitted = true;
-    const user = this.loginForm.value;
+    // this.setUserData();
+    const userData = this.loginForm.value;
+    console.log('userData', userData);
+
     if (this.loginForm.invalid) {
-      return (this.loading = true);
+      window.alert('the form is not valid');
     } else {
-      this.store.select('login').subscribe((data) => {
-        this.authUser = data;
-      });
-      const ifUserExist = this.authUser.some((res) => res.username === user.username);
-      if (ifUserExist) {
-        alert('logged in successfully');
-        this.router.navigate(['/image', { isAuthUser: false }]);
-        this.store.select('login').subscribe((data) => {
-          console.log('users', data);
-        });
-      } else {
-        alert('user is not registered');
-        this.router.navigate(['/signup']);
-      }
+      this.store.dispatch(new LogIn(this.user));
+      window.alert('logged in successfully');
+      this.router.navigate(['/image', { isAuthUser: true }]);
     }
   }
 }

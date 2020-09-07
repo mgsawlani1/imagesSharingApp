@@ -46,14 +46,14 @@ export function imageReducer(state: State = initialState, action: ImageAction.Im
     case ImageAction.ADD_IMAGE_SUCCESS: {
       return {
         image: [...state.image, action.payload],
-        message: 'The quote is added successfully!',
+        message: 'The image is added successfully!',
         success: true,
       };
     }
     case UPDATE_IMAGE_SUCCESS: {
       return {
         ...state,
-        message: 'The quote is updated successfully!',
+        message: 'The image is updated successfully!',
         success: true,
       };
     }

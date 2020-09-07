@@ -3,7 +3,7 @@ import * as image from '../store/reducers/image.reducer';
 import * as auth from '../store/reducers/login.reducer';
 
 export interface AppState {
-  // loginState: auth.State
+  authState: auth.State;
   image: image.State;
 }
 
@@ -12,5 +12,5 @@ export const reducers = {
   image: image.imageReducer,
 };
 
-export const selectAuthState = createFeatureSelector<AppState>('login');
+export const selectAuthState = createFeatureSelector<AppState>('auth');
 export const imageState = createFeatureSelector<AppState>('image');

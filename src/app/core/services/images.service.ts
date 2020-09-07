@@ -8,23 +8,20 @@ import { Image } from '../../core/models/image';
 })
 export class ImagesService {
   images: any;
+
   private _jsonURL = 'http://localhost:3000';
+
   constructor(private http: HttpClient) {}
 
-  // public getAllQuotes(): Observable<Quote[]> {
-  //   const getAllQuotesUrl = encodeURI('quotes');
-  //   return this.http
-  //     .get<Quote[]>(`${this.BASE_URL + getAllQuotesUrl}`)
-  //     .pipe(catchError(this.errorCatcher));
-  // }
-
   getImageData(): Observable<Image[]> {
-    const getAllQuotesUrl = encodeURI('images');
-    return this.http.get<Image[]>(`${this._jsonURL}/` + getAllQuotesUrl);
+    const getAllImagesUrl = encodeURI('images');
+    return this.http.get<Image[]>(`${this._jsonURL}/` + getAllImagesUrl);
   }
+
   getImageDataById(id): Observable<any> {
     return this.http.get(`${this._jsonURL}/` + 'images/' + id);
   }
+
   addImage(image: any): Observable<any> {
     return this.http.post(`${this._jsonURL}/` + 'images', image);
   }

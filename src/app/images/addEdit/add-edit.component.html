@@ -19,6 +19,7 @@
   <span *ngIf="submitted && form.description.imageUrl" class="invalid-feedback">
     <span *ngIf="form.imageUrl.errors.required">Image is required</span>
   </span>
+
   <button type="submit" aria-label="save" (click)="saveForm(editForm.value)">Save</button>
   <button type="submit" (click)="resetForm()" aria-label="Reset">Reset</button>
 </form>
