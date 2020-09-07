@@ -1,6 +1,11 @@
 import { Image } from '../../core/models/image';
 import * as ImageAction from '../actions/image.actions';
-import { DELETE_IMAGE_SUCCESS, UPDATE_IMAGE_SUCCESS } from '../actions/image.actions';
+import {
+  DELETE_IMAGE,
+  DELETE_IMAGE_SUCCESS,
+  UPDATE_IMAGE,
+  UPDATE_IMAGE_SUCCESS,
+} from '../actions/image.actions';
 import { ADD_IMAGE, GET_IMAGES } from './../actions/image.actions';
 
 export interface State {
@@ -26,12 +31,13 @@ export function imageReducer(state: State = initialState, action: ImageAction.Im
         ...state,
       };
     }
-    case ImageAction.DELETE_IMAGE: {
+
+    case DELETE_IMAGE: {
       return {
         ...state,
       };
     }
-    case ImageAction.UPDATE_IMAGE: {
+    case UPDATE_IMAGE: {
       return {
         ...state,
       };

@@ -61,8 +61,6 @@ export class LoginComponent implements OnInit {
   onSubmit(): any {
     // this.setUserData();
     const userData = this.loginForm.value;
-    console.log('userData', userData);
-
     if (this.loginForm.invalid) {
       window.alert('the form is not valid');
     } else {

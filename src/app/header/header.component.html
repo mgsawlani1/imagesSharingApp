@@ -18,9 +18,10 @@
         <button id="log" [routerLink]="'/signup'" aria-label="SignUP" *ngIf="isAuthUser">
           Sign up
         </button>
+        <div></div>
         <button id="log" (click)="logout()" aria-label="LogOut" *ngIf="isLogout">Log Out</button>
       </div>
-
+      <span></span>
       <label class="switch">
         <input type="checkbox" checked aria-label="change theme" (click)="onChangeToggle()" />
         <span class="slider round"></span>
