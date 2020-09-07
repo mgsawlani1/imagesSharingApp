@@ -1,0 +1,12 @@
+.table td,
+.table th {
+  vertical-align: middle;
+  text-align: center;
+}
+.delete {
+  background: red;
+}
+button:disabled {
+  background-color: lightgray;
+  color: grey;
+}

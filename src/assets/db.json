@@ -1,0 +1,38 @@
+{
+  "images": [
+    {
+      "id": "100",
+      "name": "dfsfs",
+      "description": "sdds",
+      "imageUrl": ""
+    },
+    {
+      "id": "n6p3em8",
+      "name": "Nature 88",
+      "description": "sdffsas",
+      "imageUrl": "as"
+    },
+    {
+      "id": "YfTT0MZ",
+      "name": "Nature 44",
+      "description": "sdds",
+      "imageUrl": "sdsd"
+    },
+    {
+      "isTrusted": true,
+      "id": "3dxDDrV"
+    },
+    {
+      "id": "KhHOoTI",
+      "name": "sddsd",
+      "description": "dsd",
+      "imageUrl": "dsds"
+    }
+  ],
+  "auth": [
+    {
+      "username": "test",
+      "password": "test@123"
+    }
+  ]
+}

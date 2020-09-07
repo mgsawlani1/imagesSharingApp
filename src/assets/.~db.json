@@ -1,0 +1,46 @@
+{
+  "images": [
+    {
+      "id": 4,
+      "name": "Doe",
+      "description": 50,
+      "imageUrl": "assets/nature1.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Doe",
+      "description": 50,
+      "imageUrl": "assets/nature1.jpg"
+    },
+    {
+      "id": "10",
+      "name": "Nature",
+      "description": "Incidunt et magni est ut.",
+      "imageUrl": "assets/nature1.jpg"
+    },
+    {
+      "id": "55",
+      "name": "jhh",
+      "description": "hh",
+      "imageUrl": "assets/nature1.jpg"
+    },
+    {
+      "id": "100",
+      "name": "dfsfs",
+      "description": "sdds",
+      "imageUrl": ""
+    },
+    {
+      "id": "20",
+      "name": "Nature5",
+      "description": "description",
+      "imageUrl": ""
+    }
+  ],
+  "auth": [
+    {
+      "username": "test",
+      "password": "test@123"
+    }
+  ]
+}

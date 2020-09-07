@@ -1,0 +1,39 @@
+<table>
+  <thead class="thead-dark">
+    <tr>
+      <th tabindex="0">ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Images</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+
+  <tr *ngFor="let img of images">
+    <td tabindex="1">
+      {{ img.id }}
+    </td>
+    <td>
+      {{ img.name }}
+    </td>
+    <td>
+      {{ img.description }}
+    </td>
+    <td><img src="{{ img.imageUrl }}" alt="Nature" height="100" width="100" /></td>
+    <td>
+      <button
+        routerLink="/addEdit/{{ img.id }}"
+        [disabled]="!isAuthUser"
+        [ngClass]="{ disabled: !isAuthUser }"
+      >
+        Edit
+      </button>
+    </td>
+    <td>
+      <button class="delete" (click)="delete(img.id)" [disabled]="!isAuthUser">Delete</button>
+    </td>
+  </tr>
+</table>
+<div>
+  <button routerLink="/addEdit" [disabled]="!isAuthUser">Add</button>
+</div>
