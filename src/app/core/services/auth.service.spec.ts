@@ -22,9 +22,9 @@ describe('AuthService', () => {
     this.service = TestBed.inject(AuthService);
   });
 
-  beforeEach(inject([AuthService, HttpTestingController], (service, httpMock) => {
-    service = service;
-    httpTestingController = httpMock;
+  beforeEach(inject([AuthService, HttpTestingController], (_service, _httpMock) => {
+    service = _service;
+    httpTestingController = _httpMock;
   }));
 
   it('should be created', () => {
@@ -34,10 +34,10 @@ describe('AuthService', () => {
   it('login: should return an array containing the valid user', () => {
     const mockCheckLoginUser = {
       username: 'test',
-      password: 'password',
+      password: 'test123',
     };
     this.service
-      .login({
+      .getAuthData({
         username: 'test',
         password: 'password',
       })
@@ -46,12 +46,7 @@ describe('AuthService', () => {
         expect(user.length).toBe(1);
         expect(user.id).toBe(1);
       });
-    const req = httpTestingController.expectOne(
-      'http://localhost:3000/auth?username=' +
-        mockCheckLoginUser.username +
-        '&password=' +
-        mockCheckLoginUser.password
-    );
+    const req = httpTestingController.expectOne('http://localhost:3000/auth');
     req.flush(dummyUsers);
     httpTestingController.verify();
   });
@@ -61,8 +56,8 @@ describe('AuthService', () => {
       username: 'new',
       password: 'new',
     };
-    this.service.signUp(mockCheckLoginUser).subscribe((user) => {
-      expect(user.name).toBe(mockCheckLoginUser.username);
+    this.service.addUser(mockCheckLoginUser).subscribe((user) => {
+      expect(user.username).toBe(mockCheckLoginUser.username);
       expect(user.password).toBe(mockCheckLoginUser.password);
     });
     const req = httpTestingController.expectOne('http://localhost:3000/auth');

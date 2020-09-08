@@ -45,7 +45,7 @@ describe('ImagesService', () => {
     expect(service1).toBeTruthy();
   });
   it('getAllImages: should return a list', () => {
-    this.service.getAllImages().subscribe((images) => {
+    this.service.getImageData().subscribe((images) => {
       expect(images).toBeDefined();
       expect(images.length).toBe(3);
       const req = httpMock.expectOne('http://localhost:3000/images');
@@ -55,7 +55,7 @@ describe('ImagesService', () => {
   });
 
   it('delete: should delete object', () => {
-    this.service.deleteImage().subscribe((images) => {
+    this.service.deleteImageById().subscribe((images) => {
       expect(images).toBeDefined();
       const req = httpMock.expectOne('http://localhost:3000/images');
       req.flush(dummyPosts);
@@ -69,7 +69,7 @@ describe('ImagesService', () => {
       description: 'new created',
       imageUrl: 'new created',
     };
-    this.service.createImage(imageCreated).subscribe((images) => {
+    this.service.addImage(imageCreated).subscribe((images) => {
       expect(images).toBeDefined();
       expect(images.length).toBe(1);
       const req = httpMock.expectOne('http://localhost:3000/images');

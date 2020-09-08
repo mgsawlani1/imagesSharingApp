@@ -5,29 +5,32 @@ body {
   background-color: white;
   font-family: 'Arial';
 }
-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  background-color: black;
-  color: white;
-  font-weight: 600;
-}
-.spacer {
-  flex: 1;
-}
+@media (min-width: 600px) {
+  header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: black;
+    color: white;
+    font-weight: 600;
+  }
+  .spacer {
+    flex: 1;
+  }
 
-button {
-  background-color: #24d529;
-  color: white;
-  font-weight: 300;
-  height: 30px;
+  button {
+    background-color: #24d529;
+    color: white;
+    font-weight: 300;
+    height: 30px;
+  }
 }
 // common css for login/signup
+
 .Username {
   width: 300px;
   height: 30px;
@@ -65,11 +68,13 @@ theme-light {
   background: blue;
   color: white;
 }
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-  align-content: center;
+@media (min-width: 600px) {
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    align-content: center;
+  }
 }
 
 td,
