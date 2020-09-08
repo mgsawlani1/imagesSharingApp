@@ -3,10 +3,19 @@
   vertical-align: middle;
   text-align: center;
 }
+img {
+  height: 100px;
+  width: 30%;
+}
 .delete {
   background: red;
 }
 button:disabled {
   background-color: lightgray;
   color: grey;
+}
+.addImageBtn {
+  float: right;
+  width: 10%;
+  background-color: #2196f3;
 }

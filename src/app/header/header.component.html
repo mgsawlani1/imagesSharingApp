@@ -15,11 +15,12 @@
         <button id="log" [routerLink]="'/login'" tabindex="1" aria-label="Login" *ngIf="isAuthUser">
           Sign in
         </button>
+        &nbsp; &nbsp;
         <button id="log" [routerLink]="'/signup'" aria-label="SignUP" *ngIf="isAuthUser">
           Sign up
         </button>
-        <div></div>
-        <button id="log" (click)="logout()" aria-label="LogOut" *ngIf="isLogout">Log Out</button>
+        &nbsp; &nbsp;
+        <button class="logout" (click)="logout()" aria-label="LogOut">Log Out</button>
       </div>
       <span></span>
       <label class="switch">

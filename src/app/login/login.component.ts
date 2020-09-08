@@ -3,11 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { User } from '../core/models/user';
 import { AuthService } from '../core/services/auth.service';
 import { ImagesService } from '../core/services/images.service';
-import { LogIn } from '../store/actions/login.actions';
-import { AppState, selectAuthState } from '../store/app.state';
+import { LogIn, LogInFailure } from '../store/actions/login.actions';
+import { AppState, selectAuthState } from './../store/app.state';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +14,6 @@ import { AppState, selectAuthState } from '../store/app.state';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  users: Observable<User[]>;
-
   images: any;
 
   username: string;
@@ -24,15 +21,12 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   submitted = false;
-  error = '';
 
-  isAuthUser: boolean = false;
+  isAuthUser: boolean;
 
   getState: Observable<any>;
 
   errorMessage: string;
-
-  user: User;
 
   constructor(
     private router: Router,
@@ -46,6 +40,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.setLoginForm();
+    this.getState.subscribe((state) => {
+      this.errorMessage = state.errorMessage;
+    });
+    this.errorMessage = undefined;
   }
 
   setLoginForm(): void {
@@ -62,10 +60,9 @@ export class LoginComponent implements OnInit {
     // this.setUserData();
     const userData = this.loginForm.value;
     if (this.loginForm.invalid) {
-      window.alert('the form is not valid');
+      this.store.dispatch(new LogInFailure(userData));
     } else {
-      this.store.dispatch(new LogIn(this.user));
-      window.alert('logged in successfully');
+      this.store.dispatch(new LogIn(userData));
       this.router.navigate(['/image', { isAuthUser: true }]);
     }
   }

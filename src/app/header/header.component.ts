@@ -36,6 +36,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.router.navigate(['/image', { isAuthUser: true }]);
+    this.router.navigate(['/image']);
   }
 }

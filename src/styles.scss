@@ -5,6 +5,7 @@ body {
   background-color: white;
   font-family: 'Arial';
 }
+
 header {
   position: absolute;
   top: 0;
@@ -44,14 +45,21 @@ button {
   color: blue;
   background-color: white;
 }
-.login {
-  width: 382px;
-  overflow: hidden;
-  margin: auto;
-  margin: 20 0 0 450px;
-  padding: 80px;
-  background: #23463f;
-  border-radius: 15px;
+.logout {
+  color: red;
+  background-color: grey;
+  border-color: grey;
+}
+@media screen and (max-width: 800px) {
+  .login {
+    width: 382px;
+    overflow: hidden;
+    margin: auto;
+    margin: 20 0 0 450px;
+    padding: 80px;
+    background: #23463f;
+    border-radius: 15px;
+  }
 }
 .darkTheme {
   background-color: gray;
@@ -63,7 +71,7 @@ theme-light {
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 50%;
+  width: 100%;
   align-content: center;
 }
 

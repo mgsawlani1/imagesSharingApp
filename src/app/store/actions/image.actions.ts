@@ -1,10 +1,10 @@
 import { Action } from '@ngrx/store';
 import { Image } from '../../core/models/image';
 
-export const GET_IMAGES = '[Image] image';
-export const ADD_IMAGE = '[Image] image';
-export const UPDATE_IMAGE = '[Image] image';
-export const DELETE_IMAGE = '[Image] image';
+export const ADD_IMAGE = '[Image] ADD';
+export const GET_IMAGES = '[Image] GET';
+export const UPDATE_IMAGE = '[Image] UPDATE';
+export const DELETE_IMAGE = '[Image] DELETE';
 export const DATA_LOAD = '[Image] LOAD';
 
 export const ADD_IMAGE_SUCCESS = '[IMAGE] ADD IMAGE SUCCESS';
@@ -26,8 +26,7 @@ export class Update implements Action {
 }
 export class Delete implements Action {
   readonly type = DELETE_IMAGE;
-
-  constructor(public payload: any) {}
+  constructor(public payload: number) {}
 }
 
 export class LoadDataSuccess implements Action {
@@ -48,6 +47,7 @@ export class DeleteImageSuccess implements Action {
 
 export type ImageActions =
   | Add
+  | GetImages
   | Update
   | Delete
   | LoadDataSuccess

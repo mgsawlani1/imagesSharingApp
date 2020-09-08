@@ -1,3 +1,6 @@
+<div>
+  <button routerLink="/addEdit" *ngIf="isAuthUser" class="addImageBtn">Add Image</button>
+</div>
 <table>
   <thead class="thead-dark">
     <tr>
@@ -5,36 +8,28 @@
       <th tabindex="0">Name</th>
       <th tabindex="0">Description</th>
       <th tabindex="0">Images</th>
-      <th colspan="2">Actions</th>
+      <th colspan="2" *ngIf="isAuthUser">Actions</th>
     </tr>
   </thead>
 
   <tr *ngFor="let img of images">
-    <td tabindex="1">
+    <td tabindex="0">
       {{ img.id }}
     </td>
-    <td>
+    <td tabindex="0">
       {{ img.name }}
     </td>
-    <td>
+    <td tabindex="0">
       {{ img.description }}
     </td>
-    <td><img src="{{ img.imageUrl }}" alt="Nature" height="100" width="100" /></td>
-    <td>
-      <button
-        routerLink="/addEdit/{{ img.id }}"
-        [disabled]="!isAuthUser"
-        [ngClass]="{ disabled: !isAuthUser }"
-      >
+    <td tabindex="0"><img src="{{ img.imageUrl }}" alt="Nature" /></td>
+    <td tabindex="0" *ngIf="isAuthUser">
+      <button routerLink="/addEdit/{{ img.id }}">
         Edit
       </button>
     </td>
-    <td>
-      <button class="delete" (click)="delete(img.id)" [disabled]="!isAuthUser">Delete</button>
+    <td tabindex="0" *ngIf="isAuthUser">
+      <button class="delete" (click)="delete(img.id)">Delete</button>
     </td>
   </tr>
 </table>
-
-<div>
-  <button routerLink="/addEdit" [disabled]="!isAuthUser">Add</button>
-</div>

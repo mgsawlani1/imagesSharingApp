@@ -1,4 +1,7 @@
 <div class="login">
+  <div *ngIf="errorMessage" class="errMsg">
+    {{ errorMessage }}
+  </div>
   <form id="login" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <label for="username">User Name </label>
     <input
@@ -30,7 +33,7 @@
 
     <br />
     <br />
-    <button type="submit" name="log" id="log" value="Log In " [disabled]="loginForm.invalid">
+    <button type="submit" name="log" id="log" value="Log In ">
       Log In
     </button>
     <br /><br />

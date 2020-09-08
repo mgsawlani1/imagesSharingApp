@@ -22,6 +22,7 @@ export class LogInFailure implements Action {
   readonly type = LOGIN_FAILURE;
   constructor(public payload: any) {}
 }
+
 export class SignUp implements Action {
   readonly type = SIGNUP;
   constructor(public payload: User) {}

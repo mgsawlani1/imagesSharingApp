@@ -33,12 +33,12 @@ describe('AuthService', () => {
 
   it('login: should return an array containing the valid user', () => {
     const mockCheckLoginUser = {
-      username: 'abc',
+      username: 'test',
       password: 'password',
     };
     this.service
       .login({
-        username: 'abc',
+        username: 'test',
         password: 'password',
       })
       .subscribe((user) => {

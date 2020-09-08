@@ -1,5 +1,7 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../core/services/auth.service';
 import { LoginComponent } from './login.component';
 
 const dummyUsers = [
@@ -16,7 +18,8 @@ describe('LoginComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      imports: [FormsModule, ReactiveFormsModule],
+      imports: [FormsModule, ReactiveFormsModule, HttpClientTestingModule],
+      providers: [AuthService],
     }).compileComponents();
   }));
 

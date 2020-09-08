@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ImagesService } from '../../core/services/images.service';
-import * as ImageAction from '../../store/actions/image.actions';
+import { Add, GetImages, Update } from '../../store/actions/image.actions';
 import { ImageState } from './../../store/image.state';
 
 @Component({
@@ -65,43 +65,23 @@ export class AddEditComponent implements OnInit {
   }
 
   resetForm(): any {
+    this.editForm.controls['id'].setValue(this.image.id);
     this.editForm.controls['name'].setValue(this.image.name);
     this.editForm.controls['description'].setValue(this.image.description);
     this.editForm.controls['imageUrl'].setValue('this.image.imageUrl');
   }
 
-  saveForm(value): any {
+  saveForm(): any {
     this.submitted = true;
-    const imageData = this.editForm.value;
+    const newImage = this.editForm.value;
     if (!this.edit) {
-      this.imgService.addImage(value).subscribe(
-        (image) => {
-          this.router.navigate(['/image', { isAuthUser: false }]);
-        },
-        (error) => {
-          console.log('Error : ', error);
-          window.alert(error.status);
-        }
-      );
+      this.store.dispatch(new Add(newImage));
+      this.store.dispatch(new GetImages());
+      this.router.navigate(['/image', { isAuthUser: true }]);
     } else {
-      this.imgService.updateImage(value).subscribe(
-        (image) => {
-          this.router.navigate(['/image', { isAuthUser: false }]);
-        },
-        (error) => {
-          console.log('Error : ', error);
-          window.alert(error);
-        }
-      );
+      this.store.dispatch(new Update(newImage));
+      this.store.dispatch(new GetImages());
+      this.router.navigate(['/image', { isAuthUser: true }]);
     }
-    // store data
-    this.store.dispatch(
-      new ImageAction.Add({
-        id: imageData.id,
-        name: imageData.name,
-        description: imageData.description,
-        imageUrl: imageData.imageUrl,
-      })
-    );
   }
 }

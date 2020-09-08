@@ -11,6 +11,7 @@ import { AddEditComponent } from './images/addEdit/add-edit.component';
 import { ImagesListComponent } from './images/images.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { AuthEffects } from './store/effects/auth.effects';
 import { ImageEffects } from './store/effects/image.effect';
 import { imageReducer } from './store/reducers/image.reducer';
 import { reducer } from './store/reducers/login.reducer';
@@ -34,7 +35,7 @@ import { reducer } from './store/reducers/login.reducer';
       login: reducer,
       image: imageReducer,
     }),
-    EffectsModule.forRoot([ImageEffects]),
+    EffectsModule.forRoot([ImageEffects, AuthEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],

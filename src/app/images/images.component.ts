@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ImagesService } from '../core/services/images.service';
-import * as ImageAction from '../store/actions/image.actions';
-import { AppState, imageState } from '../store/app.state';
+//import * as ImageAction from '../store/actions/image.actions';
+import { AppState, selectAuthState } from '../store/app.state';
+import { Delete, GetImages } from './../store/actions/image.actions';
 
 @Component({
   selector: 'app-images',
@@ -16,9 +17,9 @@ export class ImagesListComponent implements OnInit {
 
   getState: Observable<any>;
 
-  createImage: boolean;
-
   isAuthUser: boolean;
+
+  isAuthenticated: boolean;
 
   constructor(
     private router: Router,
@@ -27,12 +28,11 @@ export class ImagesListComponent implements OnInit {
     private store: Store<AppState>
   ) {
     this.isAuthUser = _routeParams.snapshot.params['isAuthUser'];
-    this.getState = this.store.select(imageState);
+    this.getState = this.store.select(selectAuthState);
   }
 
   ngOnInit(): void {
     this.getAllImages();
-    this.createImage = false;
     this.store.subscribe(
       (data) => {
         this.images = data.image.image;
@@ -45,7 +45,7 @@ export class ImagesListComponent implements OnInit {
   }
 
   getAllImages(): void {
-    this.store.dispatch(new ImageAction.GetImages());
+    this.store.dispatch(new GetImages());
   }
 
   delete(id: number): any {
@@ -53,16 +53,9 @@ export class ImagesListComponent implements OnInit {
       window.alert('Please Login to Edit data');
     }
     const confirmation = window.confirm('Are you sure you want to delete this image?');
-
-    this.imgService.deleteImageById(id).subscribe(
-      (image) => {
-        this.router.navigate(['/image', { isAuthUser: false }]);
-      },
-      (error) => {
-        console.log('Error : ', error);
-        window.alert(error);
-      }
-    );
-    this.store.dispatch(new ImageAction.GetImages());
+    if (confirmation) {
+      this.store.dispatch(new Delete(id));
+      this.store.dispatch(new GetImages());
+    }
   }
 }

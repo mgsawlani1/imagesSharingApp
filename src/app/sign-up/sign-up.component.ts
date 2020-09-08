@@ -16,13 +16,17 @@ import { AppState, selectAuthState } from '../store/app.state';
 export class SignUpComponent implements OnInit {
   users: Observable<User[]>;
 
+  errorMessage: string;
+
   signUpForm: FormGroup;
 
   submitted = false;
 
-  authUser: any;
+  authUser: boolean;
 
   getState: Observable<any>;
+
+  isAuthUser: boolean;
 
   constructor(
     private router: Router,
@@ -38,6 +42,10 @@ export class SignUpComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
+    this.getState.subscribe((state) => {
+      this.errorMessage = state.errorMessage;
+    });
+    this.errorMessage = null;
   }
 
   get form(): any {
@@ -53,7 +61,7 @@ export class SignUpComponent implements OnInit {
     } else {
       this.store.dispatch(new SignUp(user));
       window.alert('Registered Successfully');
-      this.router.navigate(['/signup']);
+      this.router.navigate(['/image', { isAuthUser: true }]);
     }
   }
 }

@@ -29,7 +29,7 @@ export function reducer(state = initialState, action: AuthAction): State {
     case LoginAction.LOGIN_FAILURE: {
       return {
         ...state,
-        errorMessage: 'Incorrect email and/or password.',
+        errorMessage: 'Incorrect name and/or password.',
       };
     }
     case LoginAction.SIGNUP_SUCCESS: {
