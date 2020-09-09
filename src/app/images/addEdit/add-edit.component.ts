@@ -22,7 +22,7 @@ export class AddEditComponent implements OnInit {
 
   submitted = false;
 
-  isAuthUser: boolean = false;
+  isAuthUser: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -52,7 +52,6 @@ export class AddEditComponent implements OnInit {
         this.editForm.setValue(image);
       },
       (error) => {
-        console.log('Error : ', error);
         window.alert(error.status);
       }
     );
@@ -71,7 +70,7 @@ export class AddEditComponent implements OnInit {
     this.editForm.controls['imageUrl'].setValue('this.image.imageUrl');
   }
 
-  saveForm(): any {
+  onSubmit(): any {
     this.submitted = true;
     const newImage = this.editForm.value;
     if (!this.edit) {

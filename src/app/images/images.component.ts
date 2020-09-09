@@ -17,9 +17,10 @@ export class ImagesListComponent implements OnInit {
 
   getState: Observable<any>;
 
-  isAuthUser: boolean;
+  // isAuthUser: boolean;
 
   isAuthenticated: boolean;
+  errorMessage: string | null;
 
   constructor(
     private router: Router,
@@ -27,31 +28,28 @@ export class ImagesListComponent implements OnInit {
     private _routeParams: ActivatedRoute,
     private store: Store<AppState>
   ) {
-    this.isAuthUser = _routeParams.snapshot.params['isAuthUser'];
+    // this.isAuthUser = _routeParams.snapshot.params['isAuthUser'];
     this.getState = this.store.select(selectAuthState);
   }
 
   ngOnInit(): void {
-    this.getAllImages();
+    this.getState.subscribe((state) => {
+      this.isAuthenticated = state.isAuthenticated;
+      this.images = state.image;
+      this.errorMessage = state.errorMessage;
+    });
+    this.store.dispatch(new GetImages());
     this.store.subscribe(
       (data) => {
         this.images = data.image.image;
       },
       (error) => {
-        console.log('Error : ', error);
         window.alert(error.status);
       }
     );
   }
 
-  getAllImages(): void {
-    this.store.dispatch(new GetImages());
-  }
-
   delete(id: number): any {
-    if (!this.isAuthUser) {
-      window.alert('Please Login to Edit data');
-    }
     const confirmation = window.confirm('Are you sure you want to delete this image?');
     if (confirmation) {
       this.store.dispatch(new Delete(id));

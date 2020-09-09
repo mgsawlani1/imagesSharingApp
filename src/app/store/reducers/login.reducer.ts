@@ -1,6 +1,5 @@
 import { User } from '../../core/models/user';
-import * as LoginAction from '../actions/login.actions';
-import { AuthAction, LOGIN_SUCCESS, LOGOUT } from './../actions/login.actions';
+import { AuthAction, AuthActionTypes } from './../actions/login.actions';
 
 export interface State {
   isAuthenticated: boolean;
@@ -15,24 +14,24 @@ export const initialState: State = {
 
 export function reducer(state = initialState, action: AuthAction): State {
   switch (action.type) {
-    case LOGIN_SUCCESS: {
+    case AuthActionTypes.LOGIN_SUCCESS: {
       return {
         ...state,
         isAuthenticated: true,
         user: {
-          username: action.payload.name,
+          username: action.payload.username,
           password: action.payload.password,
         },
         errorMessage: null,
       };
     }
-    case LoginAction.LOGIN_FAILURE: {
+    case AuthActionTypes.LOGIN_FAILURE: {
       return {
         ...state,
         errorMessage: 'Incorrect name and/or password.',
       };
     }
-    case LoginAction.SIGNUP_SUCCESS: {
+    case AuthActionTypes.SIGNUP_SUCCESS: {
       return {
         ...state,
         isAuthenticated: true,
@@ -40,13 +39,13 @@ export function reducer(state = initialState, action: AuthAction): State {
         errorMessage: null,
       };
     }
-    case LoginAction.SIGNUP_FAILURE: {
+    case AuthActionTypes.SIGNUP_FAILURE: {
       return {
         ...state,
         errorMessage: 'The user is already Registered.',
       };
     }
-    case LOGOUT: {
+    case AuthActionTypes.LOGOUT: {
       return initialState;
     }
     default: {

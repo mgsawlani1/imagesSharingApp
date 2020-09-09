@@ -4,9 +4,8 @@ import { AuthService } from './auth.service';
 
 const dummyUsers = [
   {
-    id: '1',
-    username: 'user',
-    password: 'password',
+    username: 'test',
+    password: 'test123',
   },
 ];
 
@@ -39,7 +38,7 @@ describe('AuthService', () => {
     this.service
       .getAuthData({
         username: 'test',
-        password: 'password',
+        password: 'test123',
       })
       .subscribe((user) => {
         expect(user).toBeDefined();

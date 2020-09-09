@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { User } from '../core/models/user';
-import { AuthService } from '../core/services/auth.service';
 import { SignUp } from '../store/actions/login.actions';
 import { AppState, selectAuthState } from '../store/app.state';
 
@@ -22,15 +21,12 @@ export class SignUpComponent implements OnInit {
 
   submitted = false;
 
-  authUser: boolean;
-
   getState: Observable<any>;
 
   isAuthUser: boolean;
 
   constructor(
     private router: Router,
-    private authService: AuthService,
     private formBuilder: FormBuilder,
     private store: Store<AppState>
   ) {
@@ -53,15 +49,19 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit(): any {
-    this.submitted = true;
-    const user = this.signUpForm.value;
+    const payload = {
+      username: this.signUpForm.get('username').value,
+      password: this.signUpForm.get('password').value,
+    };
+    this.store.dispatch(new SignUp(payload));
+
+    // this.submitted = true;
+    //const user = this.signUpForm.value;
     // stop here if form is invalid
-    if (this.signUpForm.invalid) {
-      return alert('the form is not valid');
-    } else {
-      this.store.dispatch(new SignUp(user));
-      window.alert('Registered Successfully');
-      this.router.navigate(['/image', { isAuthUser: true }]);
-    }
+    // if (this.signUpForm.invalid) {
+    //   this.store.dispatch(new SignUpFailure(payload));
+    // } else {
+    //   this.store.dispatch(new SignUp(payload));
+    // }
   }
 }

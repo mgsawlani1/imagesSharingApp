@@ -7,20 +7,28 @@
   </head>
   <body>
     <header class="darkTheme" [ngClass]="{ 'theme-light': setDark }">
-      <h2 tabindex="1" aria-label="heading for app">Images Sharing App</h2>
+      <h2 tabindex="1" aria-label="heading for app">Images</h2>
 
       <div class="spacer"></div>
 
       <div>
-        <button id="log" [routerLink]="'/login'" tabindex="1" aria-label="Login" *ngIf="isAuthUser">
+        <button
+          id="log"
+          [routerLink]="'/login'"
+          tabindex="1"
+          aria-label="Login"
+          *ngIf="!isAuthenticated"
+        >
           Sign in
         </button>
         &nbsp; &nbsp;
-        <button id="log" [routerLink]="'/signup'" aria-label="SignUP" *ngIf="isAuthUser">
+        <button id="log" [routerLink]="'/signup'" aria-label="SignUP" *ngIf="!isAuthenticated">
           Sign up
         </button>
         &nbsp; &nbsp;
-        <button class="logout" (click)="logout()" aria-label="LogOut">Log Out</button>
+        <button class="logout" (click)="logout()" aria-label="LogOut" *ngIf="isAuthenticated">
+          Log Out
+        </button>
       </div>
       <span></span>
       <label class="switch">

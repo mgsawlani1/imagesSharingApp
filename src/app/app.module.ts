@@ -11,10 +11,9 @@ import { AddEditComponent } from './images/addEdit/add-edit.component';
 import { ImagesListComponent } from './images/images.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { reducers } from './store/app.state';
 import { AuthEffects } from './store/effects/auth.effects';
 import { ImageEffects } from './store/effects/image.effect';
-import { imageReducer } from './store/reducers/image.reducer';
-import { reducer } from './store/reducers/login.reducer';
 
 @NgModule({
   declarations: [
@@ -31,10 +30,11 @@ import { reducer } from './store/reducers/login.reducer';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({
-      login: reducer,
-      image: imageReducer,
-    }),
+    StoreModule.forRoot(reducers, {}),
+    // StoreModule.forRoot({
+    //   login: reducer,
+    //   image: imageReducer,
+    // }),
     EffectsModule.forRoot([ImageEffects, AuthEffects]),
   ],
   providers: [],

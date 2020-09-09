@@ -7,8 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   setMode = false;
-  title = 'ImagesApp';
-
+  title = 'images';
   receiveMode($event): any {
     this.setMode = $event;
   }

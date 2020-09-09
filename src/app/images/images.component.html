@@ -1,5 +1,5 @@
 <div>
-  <button routerLink="/addEdit" *ngIf="isAuthUser" class="addImageBtn">Add Image</button>
+  <button routerLink="/addEdit" *ngIf="isAuthenticated" class="addImageBtn">Add Image</button>
 </div>
 <table>
   <thead class="thead-dark">
@@ -8,7 +8,7 @@
       <th tabindex="0">Name</th>
       <th tabindex="0">Description</th>
       <th tabindex="0">Images</th>
-      <th colspan="2" *ngIf="isAuthUser">Actions</th>
+      <th colspan="2" *ngIf="isAuthenticated">Actions</th>
     </tr>
   </thead>
 
@@ -23,13 +23,13 @@
       {{ img.description }}
     </td>
     <td tabindex="0"><img src="{{ img.imageUrl }}" alt="Nature" /></td>
-    <td tabindex="0" *ngIf="isAuthUser">
+    <td tabindex="0" *ngIf="isAuthenticated">
       <button routerLink="/addEdit/{{ img.id }}">
         Edit
       </button>
     </td>
-    <td tabindex="0" *ngIf="isAuthUser">
-      <button class="delete" (click)="delete(img.id)">Delete</button>
+    <td tabindex="0" *ngIf="isAuthenticated">
+      <button class="delete" (click)="delete(img.id)" *ngIf="isAuthenticated">Delete</button>
     </td>
   </tr>
 </table>

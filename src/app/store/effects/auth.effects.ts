@@ -1,55 +1,26 @@
-// import 'rxjs/add/observable/of';
-// import 'rxjs/add/operator/catch';
-// import 'rxjs/add/operator/switchMap';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import {
-  LOGIN,
+  AuthActionTypes,
   LogIn,
   LogInFailure,
   LogInSuccess,
-  LOGIN_FAILURE,
-  LOGIN_SUCCESS,
-  LOGOUT,
-  SIGNUP,
   SignUp,
+  SignUpFailure,
   SignUpSuccess,
-  SIGNUP_FAILURE,
-  SIGNUP_SUCCESS,
 } from '../actions/login.actions';
 import { AuthService } from './../../core/services/auth.service';
 
 @Injectable()
 export class AuthEffects {
-  /**
-   *
-   */
   constructor(private actions: Actions, private authService: AuthService, private router: Router) {}
-  @Effect({ dispatch: false })
-  LogInSuccess: Observable<any> = this.actions.pipe(
-    ofType(LOGIN_SUCCESS),
-    tap((user) => {
-      localStorage.setItem('user', JSON.stringify(user.payload));
-      window.alert('Logged in successfully');
-      this.router.navigateByUrl('/');
-    })
-  );
-
-  @Effect({ dispatch: false })
-  LogInFailure: Observable<any> = this.actions.pipe(
-    ofType(LOGIN_FAILURE),
-    tap((err) => {
-      this.authService.errorMessage = err.payload.error;
-      window.alert('Invalid Credentials');
-    })
-  );
 
   @Effect()
   LogIn: Observable<any> = this.actions.pipe(
-    ofType(LOGIN),
+    ofType(AuthActionTypes.LOGIN),
     map((action: LogIn) => action.payload),
     switchMap((payload) => {
       return this.authService.getAuthData(payload).pipe(
@@ -65,8 +36,49 @@ export class AuthEffects {
   );
 
   @Effect({ dispatch: false })
+  LogInSuccess: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.LOGIN_SUCCESS),
+    tap((user) => {
+      localStorage.setItem('user', JSON.stringify(user.payload));
+      window.alert('Logged in successfully');
+      this.router.navigateByUrl('/');
+    })
+  );
+
+  @Effect({ dispatch: false })
+  LogInFailure: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.LOGIN_FAILURE),
+    tap((err) => {
+      this.authService.errorMessage = err.payload.error;
+      window.alert('Invalid Credentials');
+    })
+  );
+
+  @Effect()
+  SignUp: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.SIGNUP),
+    map((action: SignUp) => action.payload),
+    switchMap((payload) => {
+      return this.authService
+        .addUser(payload.username, payload.password)
+        .pipe(
+          map((user) => {
+            return new SignUpSuccess({
+              username: payload.username,
+              password: payload.password,
+            });
+          })
+        )
+        .pipe(
+          catchError((error) => {
+            return of(new SignUpFailure({ error }));
+          })
+        );
+    })
+  );
+  @Effect({ dispatch: false })
   SignUpSuccess: Observable<any> = this.actions.pipe(
-    ofType(SIGNUP_SUCCESS),
+    ofType(AuthActionTypes.SIGNUP_SUCCESS),
     tap((user) => {
       localStorage.setItem('user', user.payload);
       window.alert('Registered successfully');
@@ -78,25 +90,13 @@ export class AuthEffects {
    */
   @Effect({ dispatch: false })
   SignUpFailure: Observable<any> = this.actions.pipe(
-    ofType(SIGNUP_FAILURE),
+    ofType(AuthActionTypes.SIGNUP_FAILURE),
     tap((user) => {})
-  );
-  @Effect()
-  SignUp: Observable<any> = this.actions.pipe(
-    ofType(SIGNUP),
-    map((action: SignUp) => action.payload),
-    switchMap((payload) => {
-      return this.authService.addUser(payload).pipe(
-        map((data) => {
-          return new SignUpSuccess(data);
-        })
-      );
-    })
   );
 
   @Effect({ dispatch: false })
   Logout: Observable<any> = this.actions.pipe(
-    ofType(LOGOUT),
+    ofType(AuthActionTypes.LOGOUT),
     tap((user) => {
       localStorage.removeItem('user');
     })

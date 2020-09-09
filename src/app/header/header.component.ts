@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Logout } from '../store/actions/login.actions';
 import { AppState, selectAuthState } from '../store/app.state';
 
 @Component({
@@ -11,8 +12,6 @@ import { AppState, selectAuthState } from '../store/app.state';
 })
 export class HeaderComponent implements OnInit {
   @Output() mode = new EventEmitter<boolean>();
-
-  getState: Observable<any>;
 
   setDark = false;
 
@@ -24,11 +23,21 @@ export class HeaderComponent implements OnInit {
 
   errorMessage: string;
 
-  constructor(private store: Store<AppState>, private router: Router) {
+  getState: Observable<any>;
+
+  isAuthenticated: false;
+
+  constructor(private router: Router, private store: Store<AppState>) {
     this.getState = this.store.select(selectAuthState);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getState.subscribe((state) => {
+      this.isAuthenticated = state.isAuthenticated;
+      this.user = state.user;
+      this.errorMessage = state.errorMessage;
+    });
+  }
 
   onChangeToggle(): any {
     this.setDark = !this.setDark;
@@ -36,6 +45,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.router.navigate(['/image']);
+    this.store.dispatch(new Logout());
   }
 }

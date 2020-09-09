@@ -14,7 +14,7 @@
       tabindex="1"
       aria-label="username"
     />
-    <span *ngIf="submitted && form.username.errors" class="invalid-feedback">
+    <span *ngIf="submitted && form.username.errors" class="errMsg">
       <span *ngIf="form.username.errors.required">Username is required</span>
     </span>
 
@@ -29,7 +29,7 @@
       aria-label="password"
       [ngClass]="{ 'is-invalid': submitted && form.password.errors }"
     />
-    <span *ngIf="submitted && form.password.errors" class="invalid-feedback">
+    <span *ngIf="submitted && form.password.errors" class="errMsg">
       <span *ngIf="form.password.errors.required">Password is required</span>
     </span>
 

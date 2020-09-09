@@ -3,9 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AuthService } from '../core/services/auth.service';
-import { ImagesService } from '../core/services/images.service';
-import { LogIn, LogInFailure } from '../store/actions/login.actions';
+import { LogIn } from '../store/actions/login.actions';
 import { AppState, selectAuthState } from './../store/app.state';
 
 @Component({
@@ -26,12 +24,10 @@ export class LoginComponent implements OnInit {
 
   getState: Observable<any>;
 
-  errorMessage: string;
+  errorMessage: string | null;
 
   constructor(
     private router: Router,
-    private imgService: ImagesService,
-    private authService: AuthService,
     private formBuilder: FormBuilder,
     private store: Store<AppState>
   ) {
@@ -57,13 +53,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): any {
-    // this.setUserData();
+    this.submitted = true;
     const userData = this.loginForm.value;
-    if (this.loginForm.invalid) {
-      this.store.dispatch(new LogInFailure(userData));
-    } else {
-      this.store.dispatch(new LogIn(userData));
-      this.router.navigate(['/image', { isAuthUser: true }]);
-    }
+    this.store.dispatch(new LogIn(userData));
   }
 }

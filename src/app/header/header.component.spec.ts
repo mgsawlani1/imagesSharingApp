@@ -1,3 +1,4 @@
+import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
@@ -13,6 +14,7 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       declarations: [HeaderComponent],
       imports: [HttpClientTestingModule, RouterTestingModule],
+      providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
     }).compileComponents();
   }));
 
