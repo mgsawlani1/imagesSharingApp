@@ -21,9 +21,9 @@ describe('AuthService', () => {
     this.service = TestBed.inject(AuthService);
   });
 
-  beforeEach(inject([AuthService, HttpTestingController], (_service, _httpMock) => {
-    service = _service;
-    httpTestingController = _httpMock;
+  beforeEach(inject([AuthService, HttpTestingController], (services, httpMock) => {
+    service = services;
+    httpTestingController = httpMock;
   }));
 
   it('should be created', () => {

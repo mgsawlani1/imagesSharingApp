@@ -14,7 +14,7 @@ import { AppState, selectAuthState } from './../store/app.state';
 export class LoginComponent implements OnInit {
   images: any;
 
-  username: string;
+  email: string;
 
   loginForm: FormGroup;
 
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
 
   setLoginForm(): void {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }

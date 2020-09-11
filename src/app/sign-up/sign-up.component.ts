@@ -35,7 +35,7 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
     this.signUpForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', [Validators.email, Validators.required]],
       password: ['', Validators.required],
     });
     this.getState.subscribe((state) => {
@@ -49,19 +49,12 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit(): any {
-    const payload = {
-      username: this.signUpForm.get('username').value,
-      password: this.signUpForm.get('password').value,
-    };
-    this.store.dispatch(new SignUp(payload));
-
-    // this.submitted = true;
-    //const user = this.signUpForm.value;
-    // stop here if form is invalid
-    // if (this.signUpForm.invalid) {
-    //   this.store.dispatch(new SignUpFailure(payload));
-    // } else {
-    //   this.store.dispatch(new SignUp(payload));
-    // }
+    this.submitted = true;
+    const user = this.signUpForm.value;
+    if (this.signUpForm.invalid) {
+      return alert('the form is not valid');
+    } else {
+      this.store.dispatch(new SignUp(user));
+    }
   }
 }

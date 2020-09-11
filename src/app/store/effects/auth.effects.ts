@@ -26,7 +26,7 @@ export class AuthEffects {
       return this.authService.getAuthData(payload).pipe(
         map((user) => {
           if (user.length > 0) {
-            return new LogInSuccess({ username: payload.username });
+            return new LogInSuccess({ email: payload.email });
           } else {
             return new LogInFailure({ error: 'Invalid credentials' });
           }
@@ -60,11 +60,11 @@ export class AuthEffects {
     map((action: SignUp) => action.payload),
     switchMap((payload) => {
       return this.authService
-        .addUser(payload.username, payload.password)
+        .addUser(payload.email, payload.password)
         .pipe(
           map((user) => {
             return new SignUpSuccess({
-              username: payload.username,
+              email: payload.email,
               password: payload.password,
             });
           })
@@ -82,6 +82,7 @@ export class AuthEffects {
     tap((user) => {
       localStorage.setItem('user', user.payload);
       window.alert('Registered successfully');
+      window.alert('Please login to see details');
       this.router.navigateByUrl('login');
     })
   );

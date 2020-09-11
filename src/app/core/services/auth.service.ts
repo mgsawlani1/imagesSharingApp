@@ -18,7 +18,7 @@ export class AuthService {
     this.errorStatusMessage = msg;
   }
 
-  readonly _jsonURL = environment.baseURL;
+  readonly jsonURL = environment.baseURL;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -28,15 +28,15 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   getAuthData(user: User): Observable<any> {
-    const url = encodeURI('auth?username=' + user.username + '&password=' + user.password);
+    const url = encodeURI('auth?email=' + user.email + '&password=' + user.password);
     return this.http
-      .get<User>(this._jsonURL + url, this.httpOptions)
+      .get<User>(this.jsonURL + url, this.httpOptions)
       .pipe(catchError(this.errorHandler));
   }
-  addUser(username: string, password: string): Observable<any> {
-    const url = `${this._jsonURL}auth`;
+  addUser(email: string, password: string): Observable<any> {
+    const url = `${this.jsonURL}auth`;
     return this.http
-      .post<User>(url, [{ username: username, password: password }], this.httpOptions)
+      .post<User>(url, { email, password }, this.httpOptions)
       .pipe(catchError(this.errorHandler));
   }
 

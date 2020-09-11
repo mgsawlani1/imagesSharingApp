@@ -15,15 +15,15 @@ const initialState: State = {
   errorMessage: null,
 };
 const dummyUser: User = {
-  username: 'test',
+  email: 'test',
   password: 'test123',
 };
 const validatedUser: User = {
-  username: 'test',
+  email: 'test',
   password: 'test123',
 };
 const invalidUser: User = {
-  username: 'aa@zz.com',
+  email: 'aa@zz.com',
   password: 'test1233',
 };
 describe('action not given', () => {
@@ -89,7 +89,7 @@ describe('registerSuccess', () => {
 
 describe('registerFailure', () => {
   it('should return the message stating that the credentials are invalid', () => {
-    const SignUpSuccessAction = new SignUpFailure();
+    const SignUpSuccessAction = new SignUpFailure('user');
     const passedState: State = {
       isAuthenticated: true,
       user: invalidUser,

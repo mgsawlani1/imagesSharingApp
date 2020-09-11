@@ -7,30 +7,17 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { moduleMetadata } from '@storybook/angular';
 import { Meta, Story } from '@storybook/angular/types-6-0';
-import { AppRoutingModule } from '../app-routing.module';
-import { ImagesService } from '../core/services/images.service';
-import { AddEditComponent } from '../images/addEdit/add-edit.component';
-import { ImagesListComponent } from '../images/images.component';
-import { LoginComponent } from '../login/login.component';
-import { SignUpComponent } from '../sign-up/sign-up.component';
 import { reducers } from '../store/app.state';
 import { AuthEffects } from '../store/effects/auth.effects';
-import { HeaderComponent } from './header.component';
+import { SignUpComponent } from './sign-up.component';
 
 export default {
-  title: 'Header',
-  component: HeaderComponent,
+  title: 'SignUp',
+  component: SignUpComponent,
   decorators: [
     moduleMetadata({
-      declarations: [
-        HeaderComponent,
-        LoginComponent,
-        ImagesListComponent,
-        AddEditComponent,
-        SignUpComponent,
-      ],
+      declarations: [],
       imports: [
-        AppRoutingModule,
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
@@ -40,17 +27,16 @@ export default {
         StoreModule.forRoot(reducers, {}),
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [ImagesService],
+      providers: [],
     }),
   ],
 } as Meta;
 
-const Template: Story<HeaderComponent> = (args: HeaderComponent) => ({
-  component: HeaderComponent,
+const Template: Story<SignUpComponent> = (args: SignUpComponent) => ({
+  component: SignUpComponent,
   props: args,
 });
-export const header = Template.bind({});
-header.args = {
+export const signup = Template.bind({});
+signup.args = {
   user: {},
-  isAuthenticated: true,
 };

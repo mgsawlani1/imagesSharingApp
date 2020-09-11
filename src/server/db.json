@@ -2,7 +2,7 @@
   "images": [
     {
       "id": 1,
-      "name": "Nature ss",
+      "name": "Nature",
       "description": "Nature, in the broadest sense, is the natural, physical, or material world or universe. Nature can refer to the phenomena of the physical world, and also to life in general. ... Although humans are part of nature, human activity is often understood as a separate category from other natural phenomena",
       "imageUrl": "assets/nature.jpg"
     },
@@ -17,30 +17,73 @@
       "name": "Rose",
       "description": "The rose is a type of flowering shrub. Its name comes from the Latin word Rosa. The flowers of the rose grow in many different colors, from the well-known red rose or yellow roses and sometimes white or purple roses. ... Most roses have prickles (incorrectly called thorns) on their stems.",
       "imageUrl": "assets/rose.jpeg"
-    },
-    {
-      "id": 7,
-      "name": "Doeeee",
-      "description": "Incidunt et magni est ut.",
-      "imageUrl": "assets/nature1.jpg"
-    },
-    {
-      "id": 8,
-      "name": "nature",
-      "description": "jhjh",
-      "imageUrl": "hjjh"
-    },
-    {
-      "id": 9,
-      "name": "Naturess",
-      "description": "ssss",
-      "imageUrl": ""
     }
   ],
   "auth": [
     {
-      "username": "test",
+      "id": 1,
+      "email": "test@gmail.com",
       "password": "test@123"
+    },
+    {
+      "email": "monika@gmail.com",
+      "password": "dsfsg",
+      "id": 2
+    },
+    {
+      "email": "monika@gmail.com",
+      "password": "test",
+      "id": 3
+    },
+    {
+      "email": "abc@gmail.com",
+      "password": "test",
+      "id": 4
+    },
+    {
+      "email": "sheela@gmail.com",
+      "password": "test",
+      "id": 5
+    },
+    {
+      "email": "m@gmail.com",
+      "password": "test",
+      "id": 6
+    },
+    {
+      "email": "abc@gmail.com",
+      "password": "test",
+      "id": 7
+    },
+    {
+      "email": "ab@gmail.com",
+      "password": "test",
+      "id": 8
+    },
+    {
+      "email": "abc@gmail.com",
+      "password": "test",
+      "id": 9
+    },
+    {
+      "email": "m@gmail.com",
+      "password": "test",
+      "id": 10
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "test@123",
+      "id": 11
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "test@123",
+      "id": 12
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "test@123",
+      "id": 13
     }
   ]
 }

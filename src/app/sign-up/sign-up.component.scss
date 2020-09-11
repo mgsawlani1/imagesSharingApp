@@ -14,6 +14,10 @@ label {
   color: white;
   font-size: 17px;
 }
+.lblError {
+  color: red;
+  font-size: 13px;
+}
 button {
   background-color: #24d529;
   color: white;
@@ -26,6 +30,6 @@ span {
   font-size: 17px;
 }
 a {
-  float: right;
-  background-color: grey;
+  float: left;
+  color: grey;
 }

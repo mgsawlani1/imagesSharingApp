@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -31,13 +32,9 @@ import { ImageEffects } from './store/effects/image.effect';
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot(reducers, {}),
-    // StoreModule.forRoot({
-    //   login: reducer,
-    //   image: imageReducer,
-    // }),
     EffectsModule.forRoot([ImageEffects, AuthEffects]),
   ],
-  providers: [],
+  providers: [...environment.providers],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

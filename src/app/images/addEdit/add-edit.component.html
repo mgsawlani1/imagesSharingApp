@@ -1,19 +1,26 @@
+<button type="submit" aria-label="Back" (click)="goBack()">Back</button>
+
 <form class="form1" [formGroup]="editForm" (ngSubmit)="onSubmit()">
   <h4 *ngIf="!edit">Add Form</h4>
   <h4 *ngIf="edit">Edit Form</h4>
 
+  <label for="id">Id</label>
+  <input type="id" id="id" formControlName="id" aria-label="id" />
+  <span *ngIf="submitted && form.id.errors" class="errMsg">
+    <span *ngIf="form.id.errors.required">Id is required</span>
+  </span>
+
   <label for="name">Name</label>
   <input type="text" id="name" formControlName="name" aria-label="name" />
   <span *ngIf="submitted && form.name.errors" class="errMsg">
-    <span *ngIf="form.errors.required">Name is required</span>
+    <span *ngIf="form.name.errors.required">Name is required</span>
   </span>
 
   <label for="description">Description</label>
   <input type="text" id="description" formControlName="description" aria-label="Description" />
   <span *ngIf="submitted && form.description.errors" class="errMsg">
-    <span *ngIf="form.description.errors.required">Description is required</span>
+    <span *ngIf="form.description.errors?.required">Description is required</span>
   </span>
-
   <label for="images">Images</label>
   <input type="text" id="images" type="text" formControlName="imageUrl" aria-label="image" />
   <span *ngIf="submitted && form.description.imageUrl" class="errMsg">

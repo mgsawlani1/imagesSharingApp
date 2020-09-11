@@ -4,11 +4,11 @@
 <table>
   <thead class="thead-dark">
     <tr>
-      <th tabindex="0">ID</th>
-      <th tabindex="0">Name</th>
-      <th tabindex="0">Description</th>
-      <th tabindex="0">Images</th>
-      <th colspan="2" *ngIf="isAuthenticated">Actions</th>
+      <th id="" tabindex="0">ID</th>
+      <th id="" tabindex="0">Name</th>
+      <th id="" tabindex="0">Description</th>
+      <th id="" tabindex="0">Images</th>
+      <th id="" colspan="2" *ngIf="isAuthenticated">Actions</th>
     </tr>
   </thead>
 
@@ -29,7 +29,7 @@
       </button>
     </td>
     <td tabindex="0" *ngIf="isAuthenticated">
-      <button class="delete" (click)="delete(img.id)" *ngIf="isAuthenticated">Delete</button>
+      <button class="delete" (click)="delete(img.id)">Delete</button>
     </td>
   </tr>
 </table>

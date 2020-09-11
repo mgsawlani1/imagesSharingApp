@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { ImagesService } from '../../core/services/images.service';
+import { ImagesService } from 'src/app/core/services/images.service';
 import { Add, GetImages, Update } from '../../store/actions/image.actions';
 import { ImageState } from './../../store/image.state';
 
@@ -24,6 +24,8 @@ export class AddEditComponent implements OnInit {
 
   isAuthUser: boolean;
 
+  id: any;
+
   constructor(
     private route: ActivatedRoute,
 
@@ -34,30 +36,26 @@ export class AddEditComponent implements OnInit {
     private store: Store<ImageState>,
 
     private fb: FormBuilder
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.editForm = this.fb.group({
-      id: ['', Validators.required],
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      imageUrl: ['', Validators.required],
+      id: [null, Validators.required],
+      name: [null, Validators.required],
+      description: [null, Validators.required],
+      imageUrl: [null, Validators.required],
     });
 
-    const id = +this.route.snapshot.paramMap.get('id');
-    if (id) {
+    this.id = +this.route.snapshot.paramMap.get('id');
+    if (this.id) {
       this.edit = true;
     }
-
-    this.imgService.getImageDataById(id).subscribe(
-      (image) => {
-        this.editForm.setValue(image);
-      },
-      (error) => {
-        window.alert(error.status);
-      }
-    );
+    if (this.edit) {
+      this.imgService.getImageDataById(this.id).subscribe((data) => {
+        this.editForm.setValue(data);
+      });
+    }
   }
-
-  ngOnInit(): void {}
 
   get form(): any {
     return this.editForm.controls;
@@ -71,16 +69,24 @@ export class AddEditComponent implements OnInit {
   }
 
   onSubmit(): any {
+    if (this.editForm.invalid) {
+      window.alert('Form is not valid Please fill required Details');
+    }
     this.submitted = true;
     const newImage = this.editForm.value;
+    //add
     if (!this.edit) {
-      this.store.dispatch(new Add(newImage));
+      this.store.dispatch(new Add(this.editForm.value));
       this.store.dispatch(new GetImages());
-      this.router.navigate(['/image', { isAuthUser: true }]);
+      this.router.navigate(['/image']);
     } else {
       this.store.dispatch(new Update(newImage));
       this.store.dispatch(new GetImages());
-      this.router.navigate(['/image', { isAuthUser: true }]);
+      window.alert('updated successfully');
+      this.router.navigate(['/image']);
     }
+  }
+  goBack(): void {
+    this.router.navigate(['/image']);
   }
 }

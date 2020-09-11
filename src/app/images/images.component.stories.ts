@@ -1,21 +1,20 @@
-import { CommonModule } from '@angular/common';
+import { APP_BASE_HREF, CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { linkTo } from '@storybook/addon-links';
 import { moduleMetadata } from '@storybook/angular';
 import { Meta, Story } from '@storybook/angular/types-6-0';
-import { environment } from '../../environments/environment.prod';
 import { reducers } from '../store/app.state';
 import { AuthEffects } from '../store/effects/auth.effects';
-import { LoginComponent } from './login.component';
+import { ImageEffects } from '../store/effects/image.effect';
+import { ImagesListComponent } from './images.component';
 
 export default {
-  title: 'Login',
-  component: LoginComponent,
+  title: 'ImagesList',
+  component: ImagesListComponent,
   decorators: [
     moduleMetadata({
       declarations: [],
@@ -25,24 +24,21 @@ export default {
         ReactiveFormsModule,
         RouterTestingModule,
         HttpClientModule,
-        EffectsModule.forRoot([AuthEffects]),
+        EffectsModule.forRoot([AuthEffects, ImageEffects]),
         StoreModule.forRoot(reducers, {}),
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [...environment.providers],
+      providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
     }),
   ],
 } as Meta;
 
-const Template: Story<LoginComponent> = (args: LoginComponent) => ({
-  component: LoginComponent,
+const Template: Story<ImagesListComponent> = (args: ImagesListComponent) => ({
+  component: ImagesListComponent,
   props: args,
 });
-
-export const Login = () => ({
-  component: LoginComponent,
-  props: {
-    text: 'login Action',
-    onClick: linkTo('button', 'image'),
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  user: {},
+  images: [],
+};

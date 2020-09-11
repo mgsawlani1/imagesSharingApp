@@ -15,8 +15,6 @@ export class HeaderComponent implements OnInit {
 
   setDark = false;
 
-  isAuthUser: boolean = true;
-
   isLogout: boolean;
 
   user = null;
@@ -44,7 +42,8 @@ export class HeaderComponent implements OnInit {
     this.mode.emit(this.setDark);
   }
 
-  logout() {
+  logout(): any {
     this.store.dispatch(new Logout());
+    this.router.navigate(['/image']);
   }
 }

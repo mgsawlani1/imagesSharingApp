@@ -1,21 +1,24 @@
+<a [routerLink]="'/image'" aria-label="Back">Back</a>
+
 <div class="login">
   <div *ngIf="errorMessage" class="errMsg">
     {{ errorMessage }}
   </div>
   <form id="login" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
-    <label for="username">User Name </label>
+    <h3>Register Form</h3>
+    <label for="email">UserName </label>
     <input
       type="text"
-      name="Username"
+      name="Email"
       class="Username"
-      formControlName="username"
-      placeholder="Username"
-      [ngClass]="{ 'is-invalid': submitted && form.username.errors }"
+      formControlName="email"
+      placeholder="Email"
+      [ngClass]="{ 'is-invalid': submitted && form.email.errors }"
       tabindex="1"
       aria-label="username"
     />
-    <span *ngIf="submitted && form.username.errors" class="errMsg">
-      <span *ngIf="form.username.errors.required">Username is required</span>
+    <span *ngIf="submitted && form.email.errors" class="errMsg">
+      <span *ngIf="form.email.errors.required">Email is required</span>
     </span>
 
     <br /><br />

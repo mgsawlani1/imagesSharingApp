@@ -19,7 +19,7 @@ export function reducer(state = initialState, action: AuthAction): State {
         ...state,
         isAuthenticated: true,
         user: {
-          username: action.payload.username,
+          email: action.payload.email,
           password: action.payload.password,
         },
         errorMessage: null,
@@ -34,8 +34,11 @@ export function reducer(state = initialState, action: AuthAction): State {
     case AuthActionTypes.SIGNUP_SUCCESS: {
       return {
         ...state,
-        isAuthenticated: true,
-        user: action.payload,
+        isAuthenticated: false,
+        user: {
+          email: action.payload.email,
+          password: action.payload.password,
+        },
         errorMessage: null,
       };
     }

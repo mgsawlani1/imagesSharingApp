@@ -35,9 +35,9 @@ describe('ImagesService', () => {
     });
     this.service = TestBed.inject(ImagesService);
   });
-  beforeEach(inject([ImagesService, HttpTestingController], (_service, _httpMock) => {
-    service = _service;
-    httpMock = _httpMock;
+  beforeEach(inject([ImagesService, HttpTestingController], (services, httpMocks) => {
+    service = services;
+    httpMock = httpMocks;
   }));
 
   it('should be created', () => {
